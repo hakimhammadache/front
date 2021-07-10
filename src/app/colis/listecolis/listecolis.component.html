@@ -1,0 +1,17 @@
+ <h2 class="text-center mt-4">Liste des colis</h2>
+<table class="table table-stripped border shadow container">
+    <thead class="bg-dark text-info my-3 py-3">
+        <th>Tracking</th>
+        <th>Poids</th>
+        <th>Volume</th>
+        <th>Prix</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let colis of liste_colis">
+            <td>{{colis.tracking}}</td>
+            <td>{{colis.poids}} </td>
+            <td>{{colis.volume}}</td>
+            <td>{{colis.prix}}</td>
+        </tr>
+    </tbody>
+</table>

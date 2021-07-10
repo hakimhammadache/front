@@ -1,0 +1,15 @@
+
+<h2 class="text-center mt-4 text-dark"> Se connecter</h2>
+<form [formGroup]="formdata" >
+    <div class="mt-5 col-10 col-sm-8 col-lg-4 mx-auto text-center">
+        <div class="col">
+            <input type="text" class="form-control" formControlName="username" placeholder="Username">
+        </div>
+        <div class="col mt-3">
+            <input type="password" class="form-control" formControlName="password" placeholder="Password">
+        </div>
+    </div>
+    <div class="col-12 text-center mx-auto mt-4">
+        <input type="button" class="btn btn-danger shadow px-3 py-2" value="Connecter" (click)="onLogin()">
+    </div>
+</form>
