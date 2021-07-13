@@ -3,9 +3,11 @@
       text-dark text-decoration-none">
         <img src="../../../assets/img/png.png" class="" width="180" alt="">
     </a>
-        <span class="nav-item mx-auto text-secondary text-capitalize" *ngIf="isLogged">{{userLogged}}</span>
+        <span class="nav-item mx-auto text-secondary text-capitalize" *ngIf="isLogged">{{role}}: {{name}} - {{station}}</span>
+        <a class="nav-item btn" *ngIf="isAgent()" routerLink="/colis/ajouter_colis">Recever</a>
+        <a class="nav-item btn" *ngIf="isLogged" routerLink="/colis/liste_colis">Colis</a>
+        <a class="nav-item btn" *ngIf="isAdmin()" routerLink="/user/liste_user">utilisateurs</a>
         <a class="nav-item btn" (click)="logout()" *ngIf="isLogged">Déconnecter</a>
         
-   
 </nav>
 <router-outlet></router-outlet>

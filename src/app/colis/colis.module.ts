@@ -6,7 +6,6 @@ import { AjoutercolisComponent } from './ajoutercolis/ajoutercolis.component';
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
-
 @NgModule({
   declarations: [
     ListecolisComponent,

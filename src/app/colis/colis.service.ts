@@ -9,7 +9,9 @@ import { Observable } from 'rxjs';
 export class ColisService {
 
 liste_colis:any;
-  url = 'http://localhost:3000/delivray';
+  url = 'http://localhost:3000/shipment';
+  urlsearch = 'http://localhost:3000/shipment/search';
+  
   constructor(
     private http: HttpClient
   ) {}
@@ -19,7 +21,10 @@ liste_colis:any;
     return res;
   }
   addcolis(data ): Observable<any>{
-    const headers = { 'content-type': 'application/json' }
     return this.http.post(this.url, data)
+  }
+  search(data){
+    console.log(data)
+   // return this.http.post(this.urlsearch, data)
   }
 }

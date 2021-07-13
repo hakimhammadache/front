@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,24 +8,24 @@ import { AuthService } from './auth/auth.service';
 })
 export class AppComponent {
   title = 'fronted';
-  user: object;
-  username: string;
-  poste: string;
-  isLogged:boolean;
-  userLogged:string;
-  constructor(private userAuth:AuthService,private router: Router) {
+  user: Object;
+  name: string;
+  role: string;
+  isLogged: boolean;
+  station: string;
+  constructor(private userAuth: AuthService, private router: Router) {
     this.user = userAuth.isAuth()
-    this.username = this.user["username"];
-    this.poste = this.user["poste"];
-    this.userAuth.isLogged.subscribe((isLogged)=>{
-      this.isLogged=isLogged;
-      
+    console.log(this.user)
+    this.name = this.user["name"];
+    console.log(this.name)
+    this.role = this.user["role"];
+    this.userAuth.isLogged.subscribe((isLogged) => {
+      this.isLogged = isLogged;
     })
     this.userAuth.userLogged.subscribe((userLogged) => {
-      this.userLogged = userLogged;
-
+      this.station = userLogged['station'];
+      this.role = userLogged['role']
     })
-
   }
   isAuth() {
     if (this.user) {
@@ -36,14 +35,14 @@ export class AppComponent {
     }
   }
   isAdmin() {
-    if (this.user['poste'] === "admin") {
+    if (this.role === "admin") {
       return true
     } else {
       return false
     }
   }
   isAgent() {
-    if (this.user['poste'] === "agent") {
+    if (this.role === "agent") {
       return true
     } else {
       return false
@@ -53,6 +52,4 @@ export class AppComponent {
     this.userAuth.logout();
     this.router.navigate(['/']);
   }
-     
 }
-

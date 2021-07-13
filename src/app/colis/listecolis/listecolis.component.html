@@ -1,17 +1,35 @@
  <h2 class="text-center mt-4">Liste des colis</h2>
-<table class="table table-stripped border shadow container">
+ <div [formGroup]="formsearch" class="form-group row mx-auto text-center col-10  mb-3 mt-5">
+     <div  class="col-4">
+        <select class="form-select" aria-label="Default select example" formControlName="station">
+            <option selected>station</option>
+            <option value="1">OuedSmar</option>
+            <option value="2">Kaidi</option>
+        </select>
+      
+       </div> 
+     <div class="col-4">
+         <input type="date" class="form-control" formControlName="date"></div>
+
+ <div class="col-2">
+    <button class="btn btn-info" (click)="searchList">Recherche</button>
+ </div>
+</div>
+<table class="table table-stripped border shadow container text-center" >
     <thead class="bg-dark text-info my-3 py-3">
         <th>Tracking</th>
-        <th>Poids</th>
-        <th>Volume</th>
+        <th *ngIf="isAdmin()">Station</th>
         <th>Prix</th>
+        <th>Date</th>
+        <th *ngIf="isAdmin()">Crée par</th>
     </thead>
     <tbody>
         <tr *ngFor="let colis of liste_colis">
             <td>{{colis.tracking}}</td>
-            <td>{{colis.poids}} </td>
-            <td>{{colis.volume}}</td>
-            <td>{{colis.prix}}</td>
+            <td *ngIf="isAdmin()">{{colis.user.station}} </td>
+            <td>{{colis.cost}}</td>
+            <td>{{colis.createdAt | date:'M/dd/yyyy H:mm'}}</td>
+            <td *ngIf="isAdmin()">{{colis.user.name}} </td>
         </tr>
     </tbody>
 </table>

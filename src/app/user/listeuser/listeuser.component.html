@@ -1,0 +1,84 @@
+<h2 class="text-center mt-4">Liste des utilisateurs</h2>
+<div class="form-group row mx-auto text-center col-10  mb-3 mt-5">
+    <div class="col-2">
+        <select class="form-select" aria-label="Default select example">
+            <option selected>station</option>
+            <option value="1">OuedSmar</option>
+            <option value="2">Kaidi</option>
+        </select>
+
+    </div>
+        <div class="col-2">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Poste</option>
+                <option value="1">Agent</option>
+                <option value="2">Admin</option>
+            </select>
+        </div>
+    <div class="col-3">
+        <input type="text" class="form-control" placeholder="Nom ou prenom">
+    </div>
+
+    <div class="col-2">
+        <button class="btn btn-info">Recherche</button>
+    </div>
+    <div class="col-3">
+        <button class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#newUser">Nouveau utilisateur</button>
+    </div>
+</div>
+<table class="table table-stripped border shadow container text-center">
+    <thead class="bg-dark text-info my-3 py-3">
+        <th>Nom et prénom</th>
+        <th>Email</th>
+        <th>Station</th>
+        <th>Poste</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of liste_users">
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.station}} </td>
+            <td>{{user.role.role}} </td>
+
+        </tr>
+    </tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="newUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nouveau utilisateur</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="">Nom et prenom</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="">Mot de passe</label>
+                    <input type="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="">Poste</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Poste</option>
+                        <option value="1">Agent</option>
+                        <option value="2">Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary">Ajouter</button>
+            </div>
+        </div>
+    </div>
+</div>

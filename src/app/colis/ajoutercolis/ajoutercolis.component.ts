@@ -1,5 +1,5 @@
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ColisService } from '../colis.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { ColisService } from '../colis.service';
 })
 export class AjoutercolisComponent implements OnInit {
 formdata:FormGroup;
+cost:number = 0;
   constructor(private colis:ColisService) { }
 
   get parcels() {
@@ -21,29 +22,29 @@ formdata:FormGroup;
       tracking: new FormControl(),
       parcels: new FormArray([
         new FormGroup({
-          weight: new FormControl(0),
-          length: new FormControl(0),
-          width: new FormControl(0),
-          height: new FormControl(0),
-          quantity: new FormControl(0),
+          weight: new FormControl(0, Validators.required),
+          length: new FormControl(0, Validators.required),
+          width: new FormControl(0, Validators.required),
+          height: new FormControl(0, Validators.required),
+          quantity: new FormControl(1, Validators.required),
         })
       ])
   })
-
 }
-  newColis(){
-    const express_reg = new RegExp(/^yal-\d{4}\w{2}$/i);
+  calculateOverweight(){
+    const express_reg1 = new RegExp(/^yal-\d{4}\w{2}$/i);
+    const express_reg2 = new RegExp(/^yal-\d{3}\w{3}$/i);
+    if (express_reg1.test(this.formdata.value['tracking']) || express_reg2.test(this.formdata.value['tracking'])){
     const data = this.formdata.value;
-
-    const colisEnv = this.colis.addcolis(data).subscribe()
-    if (colisEnv) {
-      alert('Succes')
-    } else {
-      alert('Echec')
-    }
+   this.colis.addcolis(data).subscribe(
+     (res)=>{
+       this.cost= res.cost
+     }
+   )
+  }else{
+  return alert('format tracking error')
+}
   }
-
-
   addParcel() {
     console.log(this.formdata.get('parcels'), this.formdata.value.parcels);
     (this.formdata.get('parcels') as FormArray).push(
@@ -61,5 +62,6 @@ formdata:FormGroup;
     console.log(index, this.formdata.get('parcels'), this.formdata.value.parcels);
     (this.formdata.get('parcels') as FormArray).removeAt(index)
   }
+  validateShipment(){}
 }
 

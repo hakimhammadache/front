@@ -21,13 +21,13 @@ export class AuthComponent implements OnInit {
   onLogin() {
     if (this.formdata.value['username'] !== null && this.formdata.value['password'] !== null) {
       const personne = this.appservice.login(this.formdata.value)
-/*
+
       if (!personne) {
         alert("Username ou password incorrect")
       }
     } else {
       alert("Verifiez les champs !")
-    }*/
+ 
   }
 }
 }
