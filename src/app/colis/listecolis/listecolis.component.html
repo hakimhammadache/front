@@ -1,27 +1,37 @@
  <h2 class="text-center mt-4">Liste des colis</h2>
  <div [formGroup]="formsearch" class="form-group row mx-auto text-center col-10  mb-3 mt-5">
-     <div  class="col-4">
-        <select class="form-select" aria-label="Default select example" formControlName="station">
-            <option selected>station</option>
+    <div  class="col-3">
+        <select class="form-select form-control" aria-label="Default select example" formControlName="station">
+            <option  disabled>Station</option>
             <option value="1">OuedSmar</option>
             <option value="2">Kaidi</option>
         </select>
-      
-       </div> 
-     <div class="col-4">
-         <input type="date" class="form-control" formControlName="date"></div>
-
+    </div> 
+     <div class="col-3">
+         <input type="date" class="form-control" formControlName="date">
+    </div>
  <div class="col-2">
-    <button class="btn btn-info" (click)="searchList">Recherche</button>
+    <button class="btn btn-info btn-md py-2 text-white" (click)="searchList"><i class="bi bi-search mx-2"></i></button>
  </div>
+<div class="col-2">
+    <select class="form-select form-control  py-0" [(ngModel)]="paginationState.itemsPerPage"
+        (ngModelChange)="getListColi()">
+        <option disabled>Nombre de ligne</option>
+        <option [ngValue]="2">2 ligne</option>
+        <option [ngValue]="4">4 ligne</option>
+        <option [ngValue]="6">6 ligne</option>
+    </select>
+</div>
 </div>
 <table class="table table-stripped border shadow container text-center" >
-    <thead class="bg-dark text-info my-3 py-3">
+    <thead class="bg-dark text-info">
         <th>Tracking</th>
         <th *ngIf="isAdmin()">Station</th>
         <th>Prix</th>
         <th>Date</th>
         <th *ngIf="isAdmin()">Crée par</th>
+        <th>statut</th>
+        <th>Action</th>
     </thead>
     <tbody>
         <tr *ngFor="let colis of liste_colis">
@@ -30,6 +40,14 @@
             <td>{{colis.cost}}</td>
             <td>{{colis.createdAt | date:'M/dd/yyyy H:mm'}}</td>
             <td *ngIf="isAdmin()">{{colis.user.name}} </td>
+            <td><span class="badge bg-{{shipmentStatus[colis.status].color}}">{{shipmentStatus[colis.status].text}}</span></td>
+            <td><button class="btn btn-info" (click)="showDetail(colis.id)"><i class="bi bi-eye"></i></button></td>
         </tr>
     </tbody>
 </table>
+<div class="d-flex justify-content-center p-2">
+    <ngb-pagination [collectionSize]="paginationState.totalItems" [(page)]="paginationState.currentPage" [pageSize]="paginationState.itemsPerPage"
+        (pageChange)="getListColi()">
+    </ngb-pagination>
+
+</div>

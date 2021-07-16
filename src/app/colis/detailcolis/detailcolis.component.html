@@ -10,10 +10,10 @@
         <div class="row">
             <div class="col-6">
                 <label for="">Tracking </label>
-                <input type="text" class="form-control" formControlName="tracking" placeholder="Tracking" autofocus>
+                <input type="text" class="form-control" formControlName="tracking" placeholder="Tracking" [readonly]="true">
             </div>
             <div class="col-4 mt-2">
-                <label for="" class="display-4">Prix:{{colis.cost}}</label>
+                <label for="" class="display-5 mt-2">Prix:{{colis.cost}} DA</label>
             </div>
         </div>
         <div class="" formArrayName="parcels">
@@ -52,17 +52,16 @@
                 </div>
             </div>
            
+        </div><div class="row d-flex justify-content-center mt-4">
+            <button class="btn btn-info shadow col-2 mx-2 " [hidden]="colis.status === 'VALIDATED'"
+                (click)="calculateOverweight()">Calculer</button>
+            <button class="btn btn-success shadow col-2 mx-2 " [hidden]="colis.status !== 'CREATED'"
+                (click)="valider()">Valider</button>
+            <button class="btn btn-danger shadow col-2 mx-2 " [hidden]="colis.status !== 'CREATED'"
+                (click)="cancel()">Annuler</button>
+            <button class="btn btn-warning shadow col-2 mx-2 " [hidden]="colis.status !== 'VALIDATED'"
+                (click)="print()">Imprimer</button>
         </div>
-    <div class="row d-flex justify-content-center mt-4">
-        <button class="btn btn-info shadow col-2 mx-2 " [hidden]="colis.status === 'VALIDATED'"
-            (click)="calculateOverweight()">Calculer</button>
-        <button class="btn btn-success shadow col-2 mx-2 " [hidden]="colis.status !== 'CREATED'"
-            (click)="valider()">Valider</button>
-        <button class="btn btn-danger shadow col-2 mx-2 " [hidden]="colis.status !== 'CREATED'"
-            (click)="cancel()">Annuler</button>
-        <button class="btn btn-warning shadow col-2 mx-2 " [hidden]="colis.status !== 'VALIDATED'"
-            (click)="print()">Imprimer</button>
-    </div>
     </div>
 </form>
 

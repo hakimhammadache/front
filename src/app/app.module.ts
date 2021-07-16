@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { JwtInterceptor } from './auth/jwt.interceptor';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
     AppRoutingModule  ,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
 
   ],
   providers: [{

@@ -9,7 +9,7 @@ const routes: Routes = [
   { path:'login',component:AuthComponent},
   { path: 'colis', loadChildren: ()=>import('./colis/colis.module').then(m=>m.ColisModule), canActivate:[AuthGuard]},
   { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule), canActivate:[AdminGuard]}
-
+  
 ]
 
 @NgModule({
